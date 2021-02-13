@@ -9,7 +9,7 @@ function App() {
 
   return (
     <DataProvider>
-      <div className="w-screen bg-red-900">
+      <div >
         test
       </div>
       <Test />
