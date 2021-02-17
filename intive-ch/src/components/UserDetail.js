@@ -1,6 +1,10 @@
 import React, {useContext} from 'react';
 import {DataContext} from '../context/DataContext.js';
 
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBirthdayCake, faIdBadge, faEnvelope, faPhoneAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 const UserDetail = (props) => {
 
@@ -26,8 +30,10 @@ const UserDetail = (props) => {
                         </span>
                     </p>
                     <div className="my-5">
-                        <a href={`mailto:${data[userId].email}`} className="text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-indigo-600">Contact {`${data[userId].name.first} by Mail `} 
-                            <img className="h-6 pb-1 inline" src="https://banner2.cleanpng.com/20180704/hxr/kisspng-computer-icons-holzland-kster-font-awesome-email-5b3cc67aaf8599.455042101530709626719.jpg"></img>
+                        <a href={`mailto:${data[userId].email}`} className="text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-blue-500">Contact {`${data[userId].name.first} by Mail `} 
+                            <FontAwesomeIcon className="pt-1 text-2xl text-white" icon={faEnvelope} />
+                            
+                            {/* <img className="h-6 pb-1 inline" src="https://banner2.cleanpng.com/20180704/hxr/kisspng-computer-icons-holzland-kster-font-awesome-email-5b3cc67aaf8599.455042101530709626719.jpg"></img> */}
                         </a>
                     </div>
 
@@ -35,28 +41,29 @@ const UserDetail = (props) => {
                         <h3 className="font-bold text-gray-600 text-left px-4">Information about {`${data[userId].name.first}:`}</h3>
                         <div className="mt-5 w-full">
                             <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150" >
-                                <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2"/>
+                                <FontAwesomeIcon className="mr-2 text-2xl text-blue-500" icon={faIdBadge} />
+                                {/* <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2 text-2xl text-blue-500"/> */}
                                     Username: {`${data[userId].login.username} since ${data[userId].registered.date.slice(5,7)}/${data[userId].registered.date.slice(8,10)}/${data[userId].registered.date.slice(0,4)} (${data[userId].registered.age} year/s ago)`}
                             </div>
                             
-                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150" >
-                                <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2"/>
-                                    Date of Birth: {`${data[userId].dob.date.slice(5,7)}/${data[userId].dob.date.slice(8,10)}/${data[userId].dob.date.slice(0,4)} (${data[userId].dob.age})`}
+                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 block hover:bg-gray-100 transition duration-150" >
+                                <FontAwesomeIcon className="mr-2 text-2xl text-blue-500" icon={faBirthdayCake} />
+                                Date of Birth: {`${data[userId].dob.date.slice(5,7)}/${data[userId].dob.date.slice(8,10)}/${data[userId].dob.date.slice(0,4)} (${data[userId].dob.age})`}
                             </div>
 
-                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150" >
-                                <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2"/>
-                                    E-mail: {`${data[userId].email}`}
+                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 block hover:bg-gray-100 transition duration-150" >
+                                <FontAwesomeIcon className="mr-2 text-xl text-blue-500" icon={faEnvelope} />
+                                E-mail: {`${data[userId].email}`}
                             </div>
 
-                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150" >
-                                <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2"/>
-                                    Phone: {`${data[userId].cell}`}
+                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 block hover:bg-gray-100 transition duration-150" >
+                                <FontAwesomeIcon className="mr-2 text-xl text-blue-500" icon={faPhoneAlt} />
+                                Phone: {`${data[userId].cell}`}
                             </div>
 
-                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150" >
-                                <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" className="rounded-full h-6 shadow-md inline-block mr-2"/>
-                                    Full Address: {`${data[userId].location.street.name} ${data[userId].location.street.number}, ${data[userId].location.city}, ${data[userId].location.state}, ${data[userId].location.country}`}
+                            <div className="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 block hover:bg-gray-100 transition duration-150" >
+                                <FontAwesomeIcon className="mr-2 text-2xl text-blue-500" icon={faMapMarkerAlt} />
+                                Full Address: {`${data[userId].location.street.name} ${data[userId].location.street.number}, ${data[userId].location.city}, ${data[userId].location.state}, ${data[userId].location.country}`}
                             </div>
                         </div>
                     </div>
