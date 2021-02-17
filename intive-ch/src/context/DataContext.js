@@ -8,47 +8,51 @@ const DataContext = React.createContext();
 
 const DataProvider = (props) => {
     const [result, setResult] = useState([]);
-    const [amountUsers, setAmountUsers] = useState(2);
+    const [amountUsers, setAmountUsers] = useState(50);
     const [loadToggle, setLoadToggle] = useState(true)
-    const [countryCodes, setCountryCodes] = useState([]);
+    const [userId, setUserId] = useState();
     
     const addContent = (data) => {
         setResult(result.concat(data));
     }
 
-    useEffect( () => {
+    const setId = (id) => {
+        setUserId(id);
+    }
 
-         
+    function infiniteScroll(){
+        // checks if the user reached the bottom of the page
+        const scrollTop = (document.documentElement
+            && document.documentElement.scrollTop)
+            || document.body.scrollTop;
+          const scrollHeight = (document.documentElement
+            && document.documentElement.scrollHeight)
+            || document.body.scrollHeight;
+          if (scrollTop + window.innerHeight + 50 >= scrollHeight){
+            setLoadToggle(!loadToggle);
+            console.log('final')
+          }
+    }
+
+    useEffect( () => {
         axios.get(`https://randomuser.me/api/?results=${amountUsers}`)
         .then(res => {
             addContent(res.data.results);
-            res.data.results.forEach((item, index) => {
-                let code = ''
-                axios.get(`https://restcountries.eu/rest/v2/name/${item.location.country}`)
-                .then(res => {
-                    console.log(item.location.country)
-                    console.log(res.data[0].alpha2Code)
-                    code = res.data[0].alpha2Code;
-                    setCountryCodes(countryCodes => [...countryCodes, code])
-                })
-            })
         })
 
+        window.addEventListener('scroll', infiniteScroll);
+        return () => window.removeEventListener('scroll', infiniteScroll);
     }, [loadToggle])
-
-    // useEffect( () => {
-    //     console.log(result)
-    //     console.log(countryCodes)
-    // }, [result, countryCodes])
 
     return(
         <>
             <DataContext.Provider
                 value={{
                     data: result,
-                    codes: countryCodes,
                     loadToggle: loadToggle,
-                    changeLoadToggle: setLoadToggle
+                    changeLoadToggle: setLoadToggle,
+                    userId: userId,
+                    setId: setId
                 }}
             >
                 {props.children}
